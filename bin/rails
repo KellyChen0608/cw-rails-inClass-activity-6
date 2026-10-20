@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# Festival Schema Sprint: generators are switched off on purpose.
+# The point of this exercise is to write migrations and models by hand.
+if %w[g generate d destroy].include?(ARGV.first) && ENV["ALLOW_GENERATE"].nil?
+  abort <<~MSG
+    "rails #{ARGV.first}" is disabled for this exercise.
+    Write your migration and model files by hand in your editor.
+    (Need a reminder of the syntax? See the library/book example in the handout.)
+  MSG
+end
+
+APP_PATH = File.expand_path("../config/application", __dir__)
+require_relative "../config/boot"
+require "rails/commands"

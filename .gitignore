@@ -1,0 +1,16 @@
+# Databases
+/db/*.sqlite3
+/db/*.sqlite3-*
+
+# Logs and temp files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# NOTE: db/schema.rb is NOT ignored. It is a deliverable.

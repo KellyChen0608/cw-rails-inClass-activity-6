@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Collects the team's deliverables into submission/.
+# Run it from anywhere inside the repo, on your merged branch, after db:migrate.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+mkdir -p submission
+
+# 1. Schema
+cp db/schema.rb submission/schema.rb
+
+# 2. All models
+{
+  for f in app/models/*.rb; do
+    echo "# ===== $f ====="
+    cat "$f"
+    echo
+  done
+} > submission/models.txt
+
+# 3. Nested routes (header line plus the matching routes)
+bin/rails routes | awk 'NR==1 || /stages|tracks|tickets|performances/' > submission/routes.txt
+
+# 4. Seeds (or paste your console transcript into submission/console_transcript.txt)
+[ -f db/seeds.rb ] && cp db/seeds.rb submission/seeds.rb
+
+echo "Wrote:"
+ls -1 submission
+echo
+echo "Still to do: fill in submission/reflection.md (and a console transcript if you did not use seeds.rb)."
