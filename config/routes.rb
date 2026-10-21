@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
 
   # ---------- Pair A: Festival -> Stage ----------
-
+  # URL to list stages for one festival: /festivals/:festival_id/stages
+  # parent id parameter: :festival_id
+  resources :festivals do
+    resources :stages
+  end
 
 
   # ---------- Pair B: Artist -> Track (use shallow nesting) ----------
