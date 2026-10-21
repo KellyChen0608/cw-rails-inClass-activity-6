@@ -18,8 +18,13 @@ Rails.application.routes.draw do
   #                  PUT    /artists/:id(.:format)              artists#update
   #                  DELETE /artists/:id(.:format)              artists#destroy
 
+  # :artist_id holds the id of the artist
+  # put patch and delete for artist_track dissapeared when we added shallow:true
+
+
   resources :artists do
     resources :track, shallow:true
+    resources :performances
   end
 
 
